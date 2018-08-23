@@ -1,14 +1,13 @@
-module.exports = ((conf) => {
-    conf.app.get('/noticias', ((req, res) => {
+//const dbConnection = require('../../config/dbConnection');
+module.exports = ((app) => {
+    
+    app.get('/noticias', ((req, res) => {
         
-        const query = 'SELECT * FROM noticias';
-        //conf.conn.connect();
-        conf.conn.query(query, ((error, result, fields) => {
-            if(error) throw error;
-            //res.send(result);
+        const noticiasModel = app.app.models.noticiasModel;
+        const conn = app.config.dbConnection();
+
+        noticiasModel.getNoticias(conn, ((error, result, fields) => {
             res.render("noticias/noticias", { noticias: result});
         }));
-        //conf.conn.end();
-        
     }));
 });

@@ -1,18 +1,13 @@
 const express = require('express');
+const consign = require('consign');
 const app = express();
-
-const mysql = require('mysql');
-const connection = mysql.createConnection({
-    host: 'localhost', 
-    user: 'root', 
-    password: '', 
-    database: 'portal_noticias'
-});
 
 app.set('view engine', 'ejs');
 app.set('views', './app/views');
+consign()
+    .include('./app/routes')
+    .then('config/dbConnection.js')
+    .then('app/models')
+    .into(app);
 
-module.exports = {
-    "app": app,
-    "conn": connection
-};
+module.exports = app;
