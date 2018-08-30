@@ -8,6 +8,7 @@
     "gitignore": "^0.6.0"
   },
   "devDependencies": {
+    "body-parser": "^1.18.3",
     "consign": "^0.1.6",
     "ejs": "^2.6.1",
     "mysql": "^2.16.0"
